@@ -1,5 +1,6 @@
 const express = require('express');
 let app = express();
+const db = require('../database/index.js');
 
 app.use(express.static(__dirname + '/../client/dist'));
 
