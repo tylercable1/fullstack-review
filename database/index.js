@@ -30,7 +30,11 @@ let save = (err, res, apiData) => {
 
 let find = (callback) => {
   // should query mongo db, and send back top 25 repos
-  Repo.find((err, repos) => {
+  Repo
+  .find()
+  .limit(25)
+  .sort('-forks')
+  .find((err, repos) => {
   	if(err) {return console.error(err);}
   	// send repos to client
   	callback(repos);

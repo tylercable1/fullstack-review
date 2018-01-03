@@ -16,6 +16,9 @@ class App extends React.Component {
   componentDidMount () {
     this.getRepos()
   }
+  usernameClick () {
+    console.log('yo')
+  }
 
   getRepos () {
     $.ajax({
@@ -51,7 +54,7 @@ class App extends React.Component {
   render () {
     return (<div>
       <h1>Github Fetcher</h1>
-      <RepoList repos={this.state.repos}/>
+      <RepoList usernameClick={this.usernameClick.bind(this)} repos={this.state.repos}/>
       <Search onSearch={this.search.bind(this)}/>
     </div>)
   }
