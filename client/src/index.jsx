@@ -10,7 +10,7 @@ class App extends React.Component {
     this.state = { 
       repos: []
     }
-
+    this.getRepos = this.getRepos.bind(this)
   }
 
   componentDidMount () {
@@ -41,8 +41,9 @@ class App extends React.Component {
       contentType: 'application/json',
       method: 'POST',
       data: JSON.stringify({queryStr: term}),
-      success: (data) => {
-        console.log('search was successful', data);
+      success: () => {
+        console.log('search was successful');
+        this.getRepos();
       },
       error: (error) => {
         console.log(error);

@@ -12,8 +12,9 @@ app.post('/repos', function (req, res) {
   // save the repo information in the database
   // console.log(data);
   github.getReposByUsername(req.body.queryStr, (err, res, body) => db.save(null, null, body))
-  // console.log(req.body);
 
+  // console.log(req.body);
+  res.send('hey it worked')
   // db.save(data);
 });
 

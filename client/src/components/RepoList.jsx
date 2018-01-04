@@ -6,9 +6,9 @@ const RepoList = (props) => (
     There are {props.repos.length} repos.
     <ul> 
       {props.repos.map((repo) =>
-        <li>
+        <li key={repo.id}>
           <h3>{repo.reponame} </h3>
-          <span onClick={props.usernameClick} className="username"> Username: {repo.username}</span>
+          <a href={repo.url} className="username"> Username: {repo.username}</a>
         </li>
       )}
     </ul>

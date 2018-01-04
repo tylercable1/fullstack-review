@@ -10,17 +10,18 @@ db.once('open', function() {
     id: {type: Number, unique: true, required: true, dropDups: true},
     reponame: String,
     username: String,
-    forks: Number
+    forks: Number,
+    url: String
   });
   let Repo = mongoose.model('Repo', repoSchema);
 
-let save = (err, res, apiData) => {
+let save = (err, res, apiData, callback) => {
   // TODO: Your code here
   // This function should save a repo or repos to
   // the MongoDB
   var parsedData = JSON.parse(apiData);
   parsedData.forEach((repoObj) => {
-    var temp = new Repo({id: repoObj.id, reponame: repoObj.name, username: repoObj.owner.login, forks: repoObj.forks});
+    var temp = new Repo({id: repoObj.id, reponame: repoObj.name, username: repoObj.owner.login, forks: repoObj.forks, url: repoObj.html_url});
     // if (Repo.find({ id: /repoObj.id/ }))
     temp.save((err, temp) => {
       if(err) {return console.error(err);}
@@ -39,6 +40,8 @@ let find = (callback) => {
   	// send repos to client
   	callback(repos);
   });
+  // Repo.remove();
+
 }
 
 module.exports.save = save;
