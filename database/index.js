@@ -22,7 +22,6 @@ let save = (err, res, apiData, callback) => {
   var parsedData = JSON.parse(apiData);
   parsedData.forEach((repoObj) => {
     var temp = new Repo({id: repoObj.id, reponame: repoObj.name, username: repoObj.owner.login, forks: repoObj.forks, url: repoObj.html_url});
-    // if (Repo.find({ id: /repoObj.id/ }))
     temp.save((err, temp) => {
       if(err) {return console.error(err);}
     });
