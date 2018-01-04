@@ -41,8 +41,8 @@ class App extends React.Component {
       contentType: 'application/json',
       method: 'POST',
       data: JSON.stringify({queryStr: term}),
-      success: () => {
-        console.log('search was successful');
+      success: (data) => {
+        console.log('search was successful', data);
         this.getRepos();
       },
       error: (error) => {

@@ -20,11 +20,20 @@ let save = (err, res, apiData, callback) => {
   // This function should save a repo or repos to
   // the MongoDB
   var parsedData = JSON.parse(apiData);
-  parsedData.forEach((repoObj) => {
-    var temp = new Repo({id: repoObj.id, reponame: repoObj.name, username: repoObj.owner.login, forks: repoObj.forks, url: repoObj.html_url});
-    temp.save((err, temp) => {
+  console.log(parsedData);
+  Promise.all(parsedData.map((repoObj) => {
+    var temp = new Repo({
+      id: repoObj.id,
+      reponame: repoObj.name, 
+      username: repoObj.owner.login, 
+      forks: repoObj.forks, 
+      url: repoObj.html_url
+    });
+    return temp.save((err, temp) => {
       if(err) {return console.error(err);}
     });
+  })).then((data) => {
+    callback(data);
   });
 }
 
